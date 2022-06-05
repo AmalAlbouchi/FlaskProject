@@ -1,0 +1,600 @@
+{% extends "layout.html" %}
+{% block content %}
+<div >
+<div class="col-10 grid-margin stretch-card" style="margin-left: auto; margin-right: auto;">
+  <div class="card">
+    <div class="card-body">
+                                       {% if type == 'enseignant' %}
+                                      <h4 class="card-title">{{ title }} Enseignants</h4>
+                                      {% elif type == 'etudiant' %}
+                                      <h4 class="card-title">{{ title }} Etudiants</h4>
+                                      {% elif type == 'module' %}
+                                      <h4 class="card-title">{{ title }} Modules</h4>
+                                      {% elif type == 'matiere' %}
+                                      <h4 class="card-title">{{ title }} Matiere</h4>
+                                      {% elif type == 'note' %}
+                                      <h4 class="card-title">{{ title }} Note</h4>
+                                      {% elif type == 'admin' %}
+                                      <h4 class="card-title">Modification Login</h4>
+                                      {% else %}
+                                      <h4 class="card-title">Ajout</h4>
+                                      {% endif %}
+      <p class="card-description">
+        Veuillez entrer les données nécessaires
+      </p>
+      <form class="forms-sample" method="POST" action="">
+                    {{ form.hidden_tag() }}
+
+
+
+{% if type == 'etudiant' %}
+
+        <div class="form-group">
+            {{ form.CIN.label(class="form-control-label") }}
+
+            {% if form.CIN.errors %}
+                {{ form.CIN(class="form-control form-control-lg is-invalid", placeholder="CIN") }}
+                <div class="invalid-feedback">
+                    {% for error in form.CIN.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.CIN(class="form-control form-control-lg", placeholder="CIN") }}
+            {% endif %}
+</div>
+
+
+<div class="form-group">
+            {{ form.prenom.label(class="form-control-label") }}
+
+            {% if form.prenom.errors %}
+                {{ form.prenom(class="form-control form-control-lg is-invalid", placeholder="Prénom") }}
+                <div class="invalid-feedback">
+                    {% for error in form.prenom.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.prenom(class="form-control form-control-lg", placeholder="Prénom") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+          {{ form.nom.label(class="form-control-label") }}
+
+          {% if form.nom.errors %}
+              {{ form.nom(class="form-control form-control-lg is-invalid", placeholder="Nom") }}
+              <div class="invalid-feedback">
+                  {% for error in form.nom.errors %}
+                      <span>{{ error }}</span>
+                  {% endfor %}
+              </div>
+          {% else %}
+              {{ form.nom(class="form-control form-control-lg", placeholder="Nom") }}
+          {% endif %}
+</div>
+
+
+
+<div class="form-group">
+            {{ form.email.label(class="form-control-label") }}
+
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid", placeholder="Email") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+            {% endif %}
+</div>
+
+
+<div class="form-group">
+            {{ form.password.label(class="form-control-label") }}
+
+            {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid", placeholder="Mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(class="form-control form-control-lg", placeholder="Mot de passe") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.confirm_password.label(class="form-control-label") }}
+
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid", placeholder="Confirmer mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirmer mot de passe") }}
+            {% endif %}
+</div>
+
+
+<div class="form-group">
+            {{ form.specialite.label(class="form-control-label") }}
+
+            {% if form.specialite.errors %}
+                {{ form.specialite(class="form-control form-control-lg is-invalid", placeholder="Spécialité") }}
+                <div class="invalid-feedback">
+                    {% for error in form.specialite.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.specialite(class="form-control form-control-lg", placeholder="Spécialité") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.niveau.label(class="form-control-label") }}
+
+            {% if form.niveau.errors %}
+                {{ form.niveau(class="form-control form-control-lg is-invalid", placeholder="Niveau") }}
+                <div class="invalid-feedback">
+                    {% for error in form.niveau.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.niveau(class="form-control form-control-lg", placeholder="Niveau") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.groupe.label(class="form-control-label") }}
+
+            {% if form.groupe.errors %}
+                {{ form.groupe(class="form-control form-control-lg is-invalid", placeholder="Groupe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.groupe.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.groupe(class="form-control form-control-lg", placeholder="Groupe") }}
+            {% endif %}
+</div>
+
+
+
+
+{% elif type == 'enseignant' %}
+
+<div class="form-group">
+            {{ form.prenom.label(class="form-control-label") }}
+
+            {% if form.prenom.errors %}
+                {{ form.prenom(class="form-control form-control-lg is-invalid", placeholder="Prénom") }}
+                <div class="invalid-feedback">
+                    {% for error in form.prenom.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.prenom(class="form-control form-control-lg", placeholder="Prénom") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+          {{ form.nom.label(class="form-control-label") }}
+
+          {% if form.nom.errors %}
+              {{ form.nom(class="form-control form-control-lg is-invalid", placeholder="Nom") }}
+              <div class="invalid-feedback">
+                  {% for error in form.nom.errors %}
+                      <span>{{ error }}</span>
+                  {% endfor %}
+              </div>
+          {% else %}
+              {{ form.nom(class="form-control form-control-lg", placeholder="Nom") }}
+          {% endif %}
+</div>
+
+
+
+<div class="form-group">
+            {{ form.email.label(class="form-control-label") }}
+
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid", placeholder="Email") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+            {% endif %}
+</div>
+
+
+<div class="form-group">
+            {{ form.password.label(class="form-control-label") }}
+
+            {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid", placeholder="Mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(class="form-control form-control-lg", placeholder="Mot de passe") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.confirm_password.label(class="form-control-label") }}
+
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid", placeholder="Confirmer mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirmer mot de passe") }}
+            {% endif %}
+</div>
+
+
+
+{% elif type == 'module' %}
+
+
+
+
+<div class="form-group">
+            {{ form.nom.label(class="form-control-label") }}
+
+            {% if form.nom.errors %}
+                {{ form.nom(class="form-control form-control-lg is-invalid", placeholder="Nom") }}
+                <div class="invalid-feedback">
+                    {% for error in form.nom.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.nom(class="form-control form-control-lg", placeholder="Nom") }}
+            {% endif %}
+
+</div>
+<div class="form-group">
+            {{ form.semestre.label(class="form-control-label") }}
+
+            {% if form.semestre.errors %}
+                {{ form.semestre(class="form-control form-control-lg is-invalid", placeholder="Semestre", name="test") }}
+                <div class="invalid-feedback">
+                    {% for error in form.semestre.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.semestre(class="form-control form-control-lg", placeholder="Semestre") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.annee.label(class="form-control-label") }}
+
+            {% if form.annee.errors %}
+                {{ form.annee(class="form-control form-control-lg is-invalid", placeholder="Année") }}
+                <div class="invalid-feedback">
+                    {% for error in form.annee.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.annee(class="form-control form-control-lg", placeholder="Année") }}
+            {% endif %}
+</div>
+
+
+
+
+{% elif type == 'matiere' %}
+<div class="form-group">
+            {{ form.nom.label(class="form-control-label") }}
+
+            {% if form.nom.errors %}
+                {{ form.nom(class="form-control form-control-lg is-invalid", placeholder="Nom") }}
+                <div class="invalid-feedback">
+                    {% for error in form.nom.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.nom(class="form-control form-control-lg", placeholder="Nom") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.coeff.label(class="form-control-label") }}
+
+            {% if form.coeff.errors %}
+                {{ form.coeff(class="form-control form-control-lg is-invalid", placeholder="Coefficient") }}
+                <div class="invalid-feedback">
+                    {% for error in form.coeff.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.coeff(class="form-control form-control-lg", placeholder="Coefficient") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.pourcentageTP.label(class="form-control-label") }}
+
+            {% if form.pourcentageTP.errors %}
+                {{ form.pourcentageTP(class="form-control form-control-lg is-invalid", placeholder="Pourcentage TP") }}
+                <div class="invalid-feedback">
+                    {% for error in form.pourcentageTP.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.pourcentageTP(class="form-control form-control-lg", placeholder="Pourcentage TP") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.pourcentageDS.label(class="form-control-label") }}
+
+            {% if form.pourcentageDS.errors %}
+                {{ form.pourcentageDS(class="form-control form-control-lg is-invalid", placeholder="Pourcentage DS") }}
+                <div class="invalid-feedback">
+                    {% for error in form.pourcentageDS.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.pourcentageDS(class="form-control form-control-lg", placeholder="Pourcentage DS") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.pourcentageExam.label(class="form-control-label") }}
+
+            {% if form.pourcentageExam.errors %}
+                {{ form.pourcentageExam(class="form-control form-control-lg is-invalid", placeholder="Pourcentage Examen") }}
+                <div class="invalid-feedback">
+                    {% for error in form.pourcentageExam.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.pourcentageExam(class="form-control form-control-lg", placeholder="Pourcentage Examen") }}
+            {% endif %}
+</div>
+
+                    <div class="form-group">
+                      <label for="exp">Module</label>
+                        <select name="module" class="form-control form-control-lg" id="exp" required>
+
+
+                            {% if module %}
+                                <option value="">Choisir un module</option>
+                                {% for item in modules %}
+                                        {% if module == item %}
+                                           <option  value="{{ item.id }}" selected>{{ item.nom }}</option>
+                                        {% else %}
+                                           <option  value="{{ item.id }}">{{ item.nom }}</option>
+                                        {% endif %}
+                                 {% endfor %}
+                               {% else %}
+                                <option value="" selected>Choisir un module</option>
+                                {% for item in modules %}
+                                           <option  value="{{ item.id }}">{{ item.nom }}</option>
+                                    {% endfor %}
+                            {% endif %}
+
+
+                        </select>
+                      </div>
+
+               <div class="form-group">
+                      <label for="exp2">Enseignant</label>
+                        <select name="enseignant" class="form-control form-control-lg" id="exp2" required>
+
+
+                           {% if enseignant %}
+                                <option value="">Choisir un Enseignant</option>
+                                {% for item in enseignants %}
+                                        {% if enseignant == item %}
+                                           <option  value="{{ item.id }}" selected>{{ item.prenom }} {{ item.nom }}</option>
+                                        {% else %}
+                                           <option  value="{{ item.id }}">{{ item.prenom }} {{ item.nom }}</option>
+                                        {% endif %}
+                                 {% endfor %}
+                               {% else %}
+                                <option value="" selected>Choisir un Enseignant</option>
+                                {% for item in enseignants %}
+                                           <option  value="{{ item.id }}">{{ item.prenom }} {{ item.nom }}</option>
+                                    {% endfor %}
+                            {% endif %}
+
+
+
+
+
+                        </select>
+                      </div>
+
+
+{% elif type == 'note' %}
+
+
+<div class="form-group">
+            {{ form.TP.label(class="form-control-label") }}
+
+            {% if form.TP.errors %}
+                {{ form.TP(class="form-control form-control-lg is-invalid", placeholder="Note TP") }}
+                <div class="invalid-feedback">
+                    {% for error in form.TP.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.TP(class="form-control form-control-lg", placeholder="Note TP") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.DS.label(class="form-control-label") }}
+
+            {% if form.DS.errors %}
+                {{ form.DS(class="form-control form-control-lg is-invalid", placeholder="Note DS") }}
+                <div class="invalid-feedback">
+                    {% for error in form.DS.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.DS(class="form-control form-control-lg", placeholder="Note DS") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.Exam.label(class="form-control-label") }}
+
+            {% if form.Exam.errors %}
+                {{ form.Exam(class="form-control form-control-lg is-invalid", placeholder="Note Examen") }}
+                <div class="invalid-feedback">
+                    {% for error in form.Exam.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.Exam(class="form-control form-control-lg", placeholder="Note Examen") }}
+            {% endif %}
+</div>
+
+
+        <div class="form-group">
+          <label for="exampleInputName1">CIN de l'étudiant</label>
+          <input name="cinEtud" type="text" class="form-control" id="exampleInputName1" required value="{{ CIN }}" placeholder="CIN de l'étudiant">
+        </div>
+
+         <div class="form-group">
+                      <label for="exp3">Matiere</label>
+                        <select name="mat" class="form-control form-control-lg" id="exp3" required>
+
+                           {% if matiere %}
+                                <option value="">Selectionner la matiere</option>
+                                {% for item in matieres %}
+                                        {% if matiere == item %}
+                                           <option  value="{{ item.id }}" selected> {{ item.nom }}</option>
+                                        {% else %}
+                                           <option  value="{{ item.id }}">{{ item.nom }}</option>
+                                        {% endif %}
+                                 {% endfor %}
+                               {% else %}
+                                <option value="" selected>Selectionner la matiere</option>
+                                {% for item in matieres %}
+                                           <option  value="{{ item.id }}">{{ item.nom }}</option>
+                                    {% endfor %}
+                            {% endif %}
+
+                        </select>
+                      </div>
+
+{% elif type == 'admin' %}
+
+
+
+<div class="form-group">
+            {{ form.email.label(class="form-control-label") }}
+
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid", placeholder="Email") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.oldpass.label(class="form-control-label") }}
+
+            {% if form.oldpass.errors %}
+                {{ form.oldpass(class="form-control form-control-lg is-invalid", placeholder="Mot de passe ancient") }}
+                <div class="invalid-feedback">
+                    {% for error in form.oldpass.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.oldpass(class="form-control form-control-lg", placeholder="Mot de passe ancient") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.password.label(class="form-control-label") }}
+
+            {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid", placeholder="Mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(class="form-control form-control-lg", placeholder="Mot de passe") }}
+            {% endif %}
+</div>
+
+<div class="form-group">
+            {{ form.confirm_password.label(class="form-control-label") }}
+
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid", placeholder="Confirmer mot de passe") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirmer mot de passe") }}
+            {% endif %}
+</div>
+
+
+
+
+
+
+{% endif %}
+
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary mr-2") }}
+              </div>
+          <!--div class=" col-2">
+              <button class="btn btn-light">Cancel</button>
+          </div-->
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

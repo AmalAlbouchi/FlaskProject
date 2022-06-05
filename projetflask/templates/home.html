@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+
+
+
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex align-items-end flex-wrap">
+                  <div class="mr-md-3 mr-xl-5">
+
+
+                                  {% if current_user.role =='admin' %}
+                  <h2>Bonjour, Admin!</h2>
+            {% else %}
+                  <h2 class="ellipsis font-weight-normal">Bonjour, {{ current_user.prenom }} {{ current_user.nom }}!
+                  </h2>
+
+            {% endif %}
+
+
+                    <p class="mb-md-0">Bienvenue à la plateforme CheckIT</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Application Web CheckIt</p>
+                  <p class="mb-4">Meilleur plateforme pour la gestion des notes!</p>
+                  <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
+                    <div> <img src="static/images/school.jpg" alt="logo" style="width: 100%"></div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Telecharger la version mobile</p>
+                  <h4>Sur Android</h4>
+                  <p class="text-muted">Pour un accès plus facile à CheckIT et toutes ses fonctionnalités</p>
+
+                    <div> <img src="static/images/and.jpg" alt="logo" style="width: 100%; float: down"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">{{ table }}</p>
+                  <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+
+                        {% if current_user.role == 'admin' %}
+                         <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Prénom
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                          <th>
+                            CIN
+                          </th>
+                          <th>
+                            Classe
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ user.nom }}
+                          </td>
+                          <td>
+                            {{ user.prenom }}
+                          </td>
+                          <td>
+                              {{ user.email }}
+                          </td>
+                          <td>
+                            {{ user.CIN }}
+                          </td>
+                          <td>
+                            {{ user.niveau }}-{{ user.specialite }}-{{ user.groupe }}
+                          </td>
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+                        {% else %}
+
+                         <thead>
+                        <tr>
+                          <th>
+                            Etudiant
+                          </th>
+                          <th>
+                            Matiere
+                          </th>
+                          <th>
+                            Note TP
+                          </th>
+                          <th>
+                            Note DS
+                          </th>
+                          <th>
+                            Note Examen
+                          </th>
+                          <th>
+                            Moyenne note
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for item in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ item.etudiant.nom }}
+                          </td>
+                          <td class="py-1">
+                            {{ item.matiere.nom }}
+                          </td>
+                          <td>
+                            {{ item.TP }}
+                          </td>
+                          <td>
+                              {{ item.DS }}
+                          </td>
+                          <td>
+                              {{ item.Exam }}
+                          </td>
+                          <td>
+                              {{ item.DS * item.matiere.pourcentageDS + item.TP * item.matiere.pourcentageTP +item.Exam * item.matiere.pourcentageExam }}
+                          </td>
+
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+                        {% endif %}
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Institut Supérieur d'Informatique Université de Tunis El Manar</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

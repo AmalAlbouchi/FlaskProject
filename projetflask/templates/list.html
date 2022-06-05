@@ -1,0 +1,372 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <!--div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Striped Table</h4>
+                  <p class="card-description">
+                    Add class <code>.table-striped</code>
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Prénom
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                          <th>
+                            CIN
+                          </th>
+                          <th>
+                            Role
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ user.nom }}
+                          </td>
+                          <td>
+                            {{ user.prenom }}
+                          </td>
+                          <td>
+                              {{ user.email }}
+                          </td>
+                          <td>
+                            {{ user.CIN }}
+                          </td>
+                          <td>
+                            {{ user.role }}
+                          </td>
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div-->
+
+
+
+
+   <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">{% if type == 'enseignant' %}
+                                      <h4 class="card-title">Liste Enseignants</h4>
+                                      {% elif type == 'etudiant' %}
+                                      <h4 class="card-title">Liste Etudiants</h4>
+                                      {% elif type == 'module' %}
+                                      <h4 class="card-title">Liste Modules</h4>
+                                      {% elif type == 'matiere' %}
+                                      <h4 class="card-title">Liste Matiere</h4>
+                                      {% elif type == 'note' %}
+                                      <h4 class="card-title">Liste Note</h4>
+                                      {% else %}
+                                      <h4 class="card-title">Liste</h4>
+                                      {% endif %}
+                  <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+
+
+{% if type == 'enseignant' %}
+                        <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Prénom
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                            {% if current_user.role == "admin" %}
+                            <th>Modification</th>
+                            {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td>
+                            {{ user.nom }}
+                          </td>
+                          <td>
+                            {{ user.prenom }}
+                          </td>
+                          <td>
+                              {{ user.email }}
+                          </td>
+                                      {% if current_user.role == "admin" %}
+                                           <td style="width:15%">
+                                                <a class="btn btn-secondary" href="{{ url_for('updateEnseignant', item_id=user.id) }}">Modifier</a>
+                                                <a class="btn btn-danger" href="{{ url_for('deleteEnseignant', item_id=user.id) }}">Supprimer</a>
+                                            </td>
+                                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+{% elif type == 'etudiant' %}
+
+                        <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Prénom
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                          <th>
+                            CIN
+                          </th>
+                          <th>
+                            Classe
+                          </th>
+                            {% if current_user.role == "admin" %}
+                            <th>Modification</th>
+                            {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ user.nom }}
+                          </td>
+                          <td>
+                            {{ user.prenom }}
+                          </td>
+                          <td>
+                              {{ user.email }}
+                          </td>
+                          <td>
+                            {{ user.CIN }}
+                          </td>
+                          <td>
+                            {{ user.niveau }}-{{ user.specialite }}-{{ user.groupe }}
+                          </td>
+                                      {% if current_user.role == "admin" %}
+                                           <td style="width:15%">
+                                                <a class="btn btn-secondary" href="{{ url_for('updateEtudiant', item_id=user.id) }}">Modifier</a>
+                                                <a class="btn btn-danger" href="{{ url_for('deleteEtudiant', item_id=user.id) }}">Supprimer</a>
+                                            </td>
+                                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+{% elif type == 'module' %}
+
+                        <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Semestre
+                          </th>
+                          <th>
+                            Année
+                          </th>
+                            {% if current_user.role == "admin" %}
+                            <th>Modification</th>
+                            {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ user.nom }}
+                          </td>
+                          <td class="py-1">
+                            {{ user.semestre }}
+                          </td>
+                          <td>
+                              {{ user.annee }}
+                          </td>
+                                      {% if current_user.role == "admin" %}
+                                           <td style="width:15%">
+                                                <a class="btn btn-secondary" href="{{ url_for('updateModule', item_id=user.id) }}">Modifier</a>
+                                                <a class="btn btn-danger" href="{{ url_for('deleteModule', item_id=user.id) }}">Supprimer</a>
+                                            </td>
+                                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+{% elif type == 'matiere' %}
+
+                        <thead>
+                        <tr>
+                          <th>
+                            Nom
+                          </th>
+                          <th>
+                            Coefficient
+                          </th>
+                          <th>
+                            Pourcentage TP
+                          </th>
+                          <th>
+                            Pourcentage DS
+                          </th>
+                          <th>
+                            Pourcentage Examen
+                          </th>
+                          <th>
+                            Module
+                          </th>
+                          <th>
+                            Enseignant
+                          </th>
+                            {% if current_user.role == "admin" %}
+                            <th>Modification</th>
+                            {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for user in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ user.nom }}
+                          </td>
+                          <td class="py-1">
+                            {{ user.coeff }}
+                          </td>
+                          <td>
+                            {{ user.pourcentageTP }}
+                          </td>
+                          <td>
+                              {{ user.pourcentageDS }}
+                          </td>
+                          <td>
+                              {{ user.pourcentageExam }}
+                          </td>
+                          <td>
+                              {{ user.module.nom }}
+                          </td>
+                          <td>
+                              {{ user.enseignant.prenom }} {{ user.enseignant.nom }}
+                          </td>
+                                      {% if current_user.role == "admin" %}
+                                           <td style="width:15%">
+                                                <a class="btn btn-secondary" href="{{ url_for('updateMatiere', item_id=user.id) }}">Modifier</a>
+                                                <a class="btn btn-danger" href="{{ url_for('deleteMatiere', item_id=user.id) }}">Supprimer</a>
+                                            </td>
+                                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+
+{% elif type == 'note' %}
+
+
+
+                        <thead>
+                        <tr>
+                          <th>
+                            Etudiant
+                          </th>
+                          <th>
+                            Matiere
+                          </th>
+                          <th>
+                            Note TP
+                          </th>
+                          <th>
+                            Note DS
+                          </th>
+                          <th>
+                            Note Examen
+                          </th>
+                          <th>
+                            Moyenne note
+                          </th>
+                            {% if current_user.role == "enseignant" %}
+                            <th>Modification</th>
+                            {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for item in list %}
+                      <tr>
+                          <td class="py-1">
+                            {{ item.etudiant.nom }}
+                          </td>
+                          <td class="py-1">
+                            {{ item.matiere.nom }}
+                          </td>
+                          <td>
+                            {{ item.TP }}
+                          </td>
+                          <td>
+                              {{ item.DS }}
+                          </td>
+                          <td>
+                              {{ item.Exam }}
+                          </td>
+                          <td>
+                              {{ item.DS * item.matiere.pourcentageDS + item.TP * item.matiere.pourcentageTP +item.Exam * item.matiere.pourcentageExam }}
+                          </td>
+                                      {% if current_user.role == "enseignant" %}
+                                           <td style="width:15%">
+                                                <a class="btn btn-secondary" href="{{ url_for('updateNote', item_id=item.id) }}">Modifier</a>
+                                                <a class="btn btn-danger" href="{{ url_for('deleteNote', item_id=item.id) }}">Supprimer</a>
+                                            </td>
+                                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+
+
+{% endif %}
+
+
+
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+  <!--div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Effectuer la suppression?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <form action="{{ url_for('deleteEnseignant', item_id='3') }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Supprimer">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+{% endblock content %}
